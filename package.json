@@ -1,6 +1,6 @@
 {
-  "name": "teste-xls",
-  "version": "0.1.0",
+  "name": "mov-linhas-xls",
+  "version": "1.2.0",
   "private": true,
   "dependencies": {
     "@chakra-ui/react": "^2.8.2",
