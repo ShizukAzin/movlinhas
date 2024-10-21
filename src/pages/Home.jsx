@@ -23,8 +23,8 @@ const Home = () => {
 
  return(
     <div>
-        <h1>Arquivos</h1>
-        <button onClick={jsonToTxT}>Baixar .txt</button>
+        <h1></h1>
+        
         <XlsxToJson />
     </div>
  );

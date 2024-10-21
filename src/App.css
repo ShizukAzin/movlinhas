@@ -1,23 +1,118 @@
-.App {
-  text-align: left;
-  
+/* Estilos globais */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #005B4F;
+  color: #333;
 }
 
-body{
-  background-color: #282c34;
+/* Centralizando o conteúdo e dando espaçamento */
+section {
+  max-width: 800px;
+  margin: 40px auto;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Cabeçalhos */
+h2 {
+  font-size: 1.6em;
+  margin-bottom: 20px;
+  color: #4A90E2;
+}
+
+/* Formulários e inputs */
+form {
   display: flex;
   flex-direction: column;
-  padding-left: 3%;
-  align-items: left;
-  font-size: calc(10px + 1.7vmin);
-  color: white;
+  gap: 15px;
 }
 
-.App-link {
-  color: #61dafb;
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input[type="file"], select, input[type="text"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+textarea {
+  padding: 10px;
+  font-size: 1em;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: none;
+}
+
+/* Botões */
+button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #4A90E2;
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #357ABD;
+}
+
+pre {
+  background-color: #f4f4f4;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 0.9em;
+  overflow: auto;
+  white-space: pre-wrap;
+}
+
+/* Área de upload e exibição de conteúdo */
+textarea {
+  margin-top: 15px;
+  min-height: 200px;
+}
+
+/* Estilo de exibição JSON */
+pre {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 0.9em;
+  overflow: auto;
+}
+
+/* Estilo para apagar linhas */
+#linesToDelete {
+  margin-top: 10px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  section {
+    padding: 15px;
+    margin: 20px auto;
+  }
+
+  h2 {
+    font-size: 1.4em;
+  }
+
+  button {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+  }
 }
