@@ -133,29 +133,39 @@ const XlsxToJson = () => {
   };
 
   return (
-    <div>
-      {/* Seção para upload e conversão de arquivos XLSX */}
-      <section style={{ marginBottom: '20px', padding: '20px', border: '1px solid #ccc' }}>
-        <h2>Movimento de Terceiro C/C Deb.</h2>
+    <div className="tool-grid">
+      <section className="tool-card">
+        <h2>Converter planilha em TXT</h2>
+        <p className="section-description">
+          Envie um arquivo XLSX, escolha o tipo de operação e gere o TXT já no
+          formato esperado.
+        </p>
+
         <form>
-          <label htmlFor="uploadXlsx">Selecione um arquivo .xlsx:</label>
-          <input type="file" name="uploadXlsx" id="uploadXlsx" onChange={readUploadXlsxFile} />
-          
-          <label htmlFor="option">Escolha uma opção: </label>
-          <select id="option" value={selectedOption} onChange={(e) => setSelectedOption(e.target.value)}>
-            <option value="Pagto minimo cartao">Pagto minimo cartao</option>
-            <option value="Pgt.Parc.Emprestimo">Pgt.Parc.Emprestimo</option>
-          </select>
+          <div className="input-stack">
+            <div>
+              <label htmlFor="uploadXlsx">Selecione um arquivo .xlsx</label>
+              <input type="file" name="uploadXlsx" id="uploadXlsx" onChange={readUploadXlsxFile} />
+            </div>
+
+            <div>
+              <label htmlFor="option">Escolha uma opção</label>
+              <select id="option" value={selectedOption} onChange={(e) => setSelectedOption(e.target.value)}>
+                <option value="Pagto minimo cartao">Pagto minimo cartao</option>
+                <option value="Pgt.Parc.Emprestimo">Pgt.Parc.Emprestimo</option>
+              </select>
+            </div>
+          </div>
         </form>
 
         {json.length > 0 && (
-          <div>
-            <h3>Resultado</h3>
+          <div className="preview-block">
+            <p className="preview-title">Prévia do conteúdo gerado</p>
             <pre>
               {StrictNumberChars(`0175643810000000NOMEEMPRES0903${year}${month}${day}`, 199)}
 
               {json.map((item, index) => (
-                <div key={index}>
+                <div className="preview-line" key={index}>
                   {StrictNumberChars(`1D${AddZeros(item.ContaCapital, 9)}${RemoverAcentos(item.NomeCliente)}`, 47)}
                   {' '}
                   {AddZeros(`${item.ContaCapital}`, 12)}
@@ -168,33 +178,56 @@ const XlsxToJson = () => {
 
               {StrictNumberChars(`9${AddZeros(json[0]?.TotalLinhas || 0, 4)}${FormatValue(json[0]?.ValorTotal?.toFixed(2) || 0).padEnd(38, '0')}`, 199)}
             </pre>
-            <button onClick={saveXlsxToTxt}>Salvar XLSX Convertido para TXT</button>
+            <div className="button-row">
+              <button onClick={saveXlsxToTxt}>Salvar XLSX convertido para TXT</button>
+            </div>
           </div>
         )}
       </section>
 
-      {/* Seção para manipulação de arquivo TXT */}
-      <section style={{ padding: '20px', border: '1px solid #ccc' }}>
-        <h2>Apagar Linhas de um Arquivo TXT</h2>
-        <input type="file" accept=".txt" onChange={handleTxtFileChange} />
-        <textarea
-          value={txtContent}
-          readOnly
-          rows={10}
-          cols={80}
-          placeholder="O conteúdo do arquivo .txt aparecerá aqui"
-        />
-        <div>
-          <label htmlFor="linesToDelete">Linhas a serem apagadas (separadas por vírgula):</label>
-          <input
-            type="text"
-            id="linesToDelete"
-            value={linesToDelete}
-            onChange={(e) => setLinesToDelete(e.target.value)}
-            placeholder="Exemplo: 1, 3, 5"
-          />
-          <button onClick={handleDeleteLines}>Apagar Linhas</button>
-          <button onClick={saveUpdatedTxt}>Salvar Arquivo .txt</button>
+      <section className="tool-card">
+        <h2>Remover linhas de um TXT</h2>
+        <p className="section-description">
+          Abra um arquivo TXT, informe os números das linhas e salve a versão já
+          ajustada.
+        </p>
+
+        <div className="input-stack">
+          <div>
+            <label htmlFor="uploadTxt">Selecione um arquivo .txt</label>
+            <input id="uploadTxt" type="file" accept=".txt" onChange={handleTxtFileChange} />
+          </div>
+
+          <div>
+            <label htmlFor="txtPreview">Conteúdo do arquivo</label>
+            <textarea
+              id="txtPreview"
+              value={txtContent}
+              readOnly
+              rows={10}
+              cols={80}
+              placeholder="O conteúdo do arquivo .txt aparecerá aqui"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="linesToDelete">Linhas a serem apagadas</label>
+            <input
+              type="text"
+              id="linesToDelete"
+              value={linesToDelete}
+              onChange={(e) => setLinesToDelete(e.target.value)}
+              placeholder="Exemplo: 1, 3, 5"
+            />
+            <p className="helper-text">
+              Separe os números por vírgula para remover múltiplas linhas.
+            </p>
+          </div>
+        </div>
+
+        <div className="button-row">
+          <button onClick={handleDeleteLines}>Apagar linhas</button>
+          <button onClick={saveUpdatedTxt}>Salvar arquivo TXT</button>
         </div>
       </section>
     </div>
