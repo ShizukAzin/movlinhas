@@ -206,20 +206,3 @@ export default XlsxToJson;
 function RemoverAcentos(texto) {
   return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 }
-
-
-const saveXlsxToTxt = () => {
-  const content = "Teste de download do arquivo TXT.";
-  const element = document.createElement('a');
-  const file = new Blob([content], { type: 'text/plain' });
-  const fileURL = URL.createObjectURL(file);
-  
-  element.href = fileURL;
-  element.download = 'test_file.txt';
-  
-  document.body.appendChild(element);
-  element.click();
-  document.body.removeChild(element);
-  
-  URL.revokeObjectURL(fileURL);
-};
