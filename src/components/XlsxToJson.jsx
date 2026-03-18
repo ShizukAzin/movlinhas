@@ -161,25 +161,35 @@ const XlsxToJson = () => {
         {json.length > 0 && (
           <div className="preview-block">
             <p className="preview-title">Prévia do conteúdo gerado</p>
-            <pre>
-              {StrictNumberChars(`0175643810000000NOMEEMPRES0903${year}${month}${day}`, 199)}
+            <div className="preview-shell">
+              <div className="preview-scroll">
+                <pre>
+                  {StrictNumberChars(`0175643810000000NOMEEMPRES0903${year}${month}${day}`, 199)}
 
-              {json.map((item, index) => (
-                <div className="preview-line" key={index}>
-                  {StrictNumberChars(`1D${AddZeros(item.ContaCapital, 9)}${RemoverAcentos(item.NomeCliente)}`, 47)}
-                  {' '}
-                  {AddZeros(`${item.ContaCapital}`, 12)}
-                  {' '}
-                  {FormatValue(`${item.ValorIntegralizaçãoFolha}`)}
-                  {' '}
-                  {selectedOption}
+                  {json.map((item, index) => (
+                    <div className="preview-line" key={index}>
+                      {StrictNumberChars(`1D${AddZeros(item.ContaCapital, 9)}${RemoverAcentos(item.NomeCliente)}`, 47)}
+                      {' '}
+                      {AddZeros(`${item.ContaCapital}`, 12)}
+                      {' '}
+                      {FormatValue(`${item.ValorIntegralizaçãoFolha}`)}
+                      {' '}
+                      {selectedOption}
+                    </div>
+                  ))}
+
+                  {StrictNumberChars(`9${AddZeros(json[0]?.TotalLinhas || 0, 4)}${FormatValue(json[0]?.ValorTotal?.toFixed(2) || 0).padEnd(38, '0')}`, 199)}
+                </pre>
+              </div>
+
+              <div className="preview-actions">
+                <p className="preview-note">
+                  A prévia agora rola dentro da caixa para o botão ficar sempre à mão.
+                </p>
+                <div className="button-row">
+                  <button onClick={saveXlsxToTxt}>Salvar XLSX convertido para TXT</button>
                 </div>
-              ))}
-
-              {StrictNumberChars(`9${AddZeros(json[0]?.TotalLinhas || 0, 4)}${FormatValue(json[0]?.ValorTotal?.toFixed(2) || 0).padEnd(38, '0')}`, 199)}
-            </pre>
-            <div className="button-row">
-              <button onClick={saveXlsxToTxt}>Salvar XLSX convertido para TXT</button>
+              </div>
             </div>
           </div>
         )}
