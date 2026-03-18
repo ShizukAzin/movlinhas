@@ -134,7 +134,7 @@ const XlsxToJson = () => {
 
   return (
     <div className="tool-grid">
-      <section className="tool-card">
+      <section className="tool-card converter-card">
         <h2>Converter planilha em TXT</h2>
         <p className="section-description">
           Envie um arquivo XLSX, escolha o tipo de operação e gere o TXT já no
@@ -160,7 +160,20 @@ const XlsxToJson = () => {
 
         {json.length > 0 && (
           <div className="preview-block">
-            <p className="preview-title">Prévia do conteúdo gerado</p>
+            <div className="preview-actions preview-actions-top">
+              <p className="preview-note">
+                Arquivo carregado. Você já pode salvar o TXT sem precisar rolar até o fim da prévia.
+              </p>
+              <div className="button-row">
+                <button onClick={saveXlsxToTxt}>Salvar XLSX convertido para TXT</button>
+              </div>
+            </div>
+
+            <div className="preview-header-row">
+              <p className="preview-title">Prévia do conteúdo gerado</p>
+              <span className="preview-badge">{json.length} linhas carregadas</span>
+            </div>
+
             <div className="preview-shell">
               <div className="preview-scroll">
                 <pre>
@@ -181,21 +194,12 @@ const XlsxToJson = () => {
                   {StrictNumberChars(`9${AddZeros(json[0]?.TotalLinhas || 0, 4)}${FormatValue(json[0]?.ValorTotal?.toFixed(2) || 0).padEnd(38, '0')}`, 199)}
                 </pre>
               </div>
-
-              <div className="preview-actions">
-                <p className="preview-note">
-                  A prévia agora rola dentro da caixa para o botão ficar sempre à mão.
-                </p>
-                <div className="button-row">
-                  <button onClick={saveXlsxToTxt}>Salvar XLSX convertido para TXT</button>
-                </div>
-              </div>
             </div>
           </div>
         )}
       </section>
 
-      <section className="tool-card">
+      <section className="tool-card tool-card--txt">
         <h2>Remover linhas de um TXT</h2>
         <p className="section-description">
           Abra um arquivo TXT, informe os números das linhas e salve a versão já
